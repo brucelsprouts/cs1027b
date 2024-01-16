@@ -4,32 +4,46 @@ public class Player {
     private int jerseyNum;
 
     public Player(String name, String position, int jerseyNum){
-        name = this.name;
-        position = this.position;
-        jerseyNum = this.jerseyNum;
+        this.name = name;
+        this.position = position;
+        this.jerseyNum = jerseyNum;
     }
 
     public String getName(){
-
+        return name;
     }
 
     public String getPosition(){
-        
+        return position;
     }
 
     public int getJerseyNum(){
-        
+        return jerseyNum;
     }
 
     public void setName(String newName){
-
+        this.name = newName;
     }
 
-    public void setPosition(String newName){
-
+    public void setPosition(String newPosition){
+        this.position = newPosition;
     }
 
-    public void setJerseyNum(int newName){
-
+    public void setJerseyNum(int newJerseyNum){
+        this.jerseyNum = newJerseyNum;
     }
+
+    public String toString(){
+        return this.name + ": #" + this.jerseyNum;
+    }
+
+    public boolean equals(Player other){
+        if this.name.equals(other.name){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    
 }
