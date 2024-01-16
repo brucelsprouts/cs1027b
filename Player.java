@@ -8,45 +8,82 @@ public class Player {
     private String position;
     private int jerseyNum;
 
-    public Player(String name, String position, int jerseyNum){
-        /*Constructor to initialize instance variables */
-
-
+    /**
+     * Constructor to initialize a Player object with the specified name, position, and jersey number.
+     * @param name       The name of the player.
+     * @param position   The position the player plays.
+     * @param jerseyNum  The jersey number of the player.
+     */
+    public Player(String name, String position, int jerseyNum) {
         this.name = name;
         this.position = position;
         this.jerseyNum = jerseyNum;
     }
 
-    public String getName(){
+    /**
+     * Gets the name of the player.
+     * @return The name of the player.
+     */
+    public String getName() {
         // Get the player's name.
+
         return name;
     }
 
-    public String getPosition(){
+    /**
+     * Gets the position of the player.
+     * @return The position of the player.
+     */
+    public String getPosition() {
         return position;
     }
 
-    public int getJerseyNum(){
+    /**
+     * Gets the jersey number of the player.
+     * @return The jersey number of the player.
+     */
+    public int getJerseyNum() {
         return jerseyNum;
     }
 
-    public void setName(String newName){
+    /**
+     * Sets the name of the player.
+     * @param newName The new name for the player.
+     */
+    public void setName(String newName) {
         this.name = newName;
     }
 
-    public void setPosition(String newPosition){
+    /**
+     * Sets the position of the player.
+     * @param newPosition The new position for the player.
+     */
+    public void setPosition(String newPosition) {
         this.position = newPosition;
     }
 
-    public void setJerseyNum(int newJerseyNum){
+    /**
+     * Sets the jersey number of the player.
+     * @param newJerseyNum The new jersey number for the player.
+     */
+    public void setJerseyNum(int newJerseyNum) {
         this.jerseyNum = newJerseyNum;
     }
 
+    /**
+     * Returns a string representation of the player in the format: "name: #jerseyNum".
+     * @return A string representation of the player.
+     */
     public String toString() {
         return this.name + ": #" + this.jerseyNum;
     }
-    
+
+    /**
+     * Checks if the current player is equal to another player based on name and jersey number.
+     * @param other The other player to compare.
+     * @return True if the players are equal, false otherwise.
+     */
     public boolean equals(Player other) {
         return this.name.equals(other.name) && this.jerseyNum == other.jerseyNum;
-    }   
+    }
 }
