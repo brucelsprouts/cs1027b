@@ -1,0 +1,24 @@
+Answers for Lab 1
+-----------------------------------------------
+
+
+PRE-LAB
+
+1. What javadoc tags will you use to document a method?
+
+@param @auther @return
+
+EXERCISE 1
+
+2. What happens if in the constructor we do not use the keyword "this"? 
+
+Instead of the programming referring to the constructors variables, it will refer to the parameters variables.
+
+EXERCISE 2
+
+3. What do you expect to be printed out in Step 11 ("Same player" or "Different player")?
+
+Logically speaking same player would be printed but because of the way that the code looks at the data, p1 may have the same information as p2 but because they're not the same thing, Different player will be printed.
+
+
+
