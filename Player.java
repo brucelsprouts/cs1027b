@@ -1,5 +1,3 @@
-import package.Player;
-
 public class Player {
     private String name;
     private String position;
