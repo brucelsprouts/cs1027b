@@ -6,13 +6,15 @@ PRE-LAB
 
 1. What javadoc tags will you use to document a method?
 
-@param @auther @return
+@author used to identify the author of the code
+@param used to describe a parameter for a method (use a separate @param line for each parameter)
+@return used to describe the value returned from a method (used only when return type is not void)
 
 EXERCISE 1
 
 2. What happens if in the constructor we do not use the keyword "this"? 
 
-Instead of the programming referring to the constructors variables, it will refer to the parameters variables.
+When the same name is used in the parameters as well as variables within the constructor, the "this" prefix differentiates the two variables.
 
 EXERCISE 2
 
