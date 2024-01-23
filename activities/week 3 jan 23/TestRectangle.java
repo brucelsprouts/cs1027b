@@ -19,7 +19,7 @@ public class TestRectangle {
 		r = new Square(5);
 		System.out.println("5." + r.toString());  // which toString does it use?
 		
-		System.out.println("6. width " + r.getWidth());  // why is this OK?
+		System.out.println("6.Width " + r.getWidth());  // why is this OK?
 		
 		//System.out.println(r.getSide()); // why does compiler complain?
 				
