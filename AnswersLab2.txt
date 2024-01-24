@@ -6,48 +6,68 @@ EXERCISE 1
 1. Looking at PrimNonPrim.java (without running it), answer these questions:
 
 a. What is the variable type of num1? Is this primitive or non-primitive?
+num1 is an int, which is a primitive type
 b. What is the variable type of num2? Is this primitive or non-primitive?
+num2 is an Integer, which is a non primitive type
 c. Can we invoke (call) methods on primitive variables?
+no, primitive variables dont have methods related to them
 d. What is the default value of an int (i.e. a non-initialized cell in an int array)?
+0
 e. What is the default value of an Integer (i.e. a non-initialized cell in an Integer array)?
+null
 f. Do you think a == b is a true statement?
+yes becasue both a and b have values of 5
 g. Do you think c == d is a true statement?
+no because c and d are differnet objects
 h. Do you think c.equals(d) is a true statement?
-
+yes becasue the equals() method compares the value wihtin the Integers
 
 
 2. What happens when you try to call a.equals(b)? Why is this happening?
-
+The code dosnt compile because the equals() method is not defined for primitive types
 
 
 3. This question refers to variables data1 and data2 in class TestDataTypes. For each one of the following statements indicate whether the comparison will return the value true or false
 
 data1 == data2: true or false?
+false
 data1.intVar == data2.intVar: true or false?
+true
 data1.charVar == data2.charVar: true or false?
+true
 data1.boolVar == data2.boolVar: true or false?
+true
 data1.doubleVar == data2.doubleVar: true or false?
+true
 data1.varA == data2.varA: true or false?
+false
 data1.varA.numItems == data2.varA.numItems: true or false?
+true
 data1.varA.arrItems == data2.varA.arrItems: true or false?
+true
 
 
 
 4. How many of your answers to question 3 were incorrect? 
-
+none
 
 
 5. Why was the result of the last comparison true, even though arrays are non-primitive types?
-
+it was true becuase arrays are objects and when using == it compares the refrences not the contents
 
 
 
 EXERCISE 3
 
 6. What values were printed out for obj1.x and obj1.y, and obj2.x and obj2.y? Why do you think is happening?
-
-
+obj.x: 10
+obj.y: 30
+obj2.x: 20
+obj2.y: 30
+this happens becasue y is static and therefore it will share instances of the ClassB class so when obj2.y is set to 30, it also affects obj.y
 
 7. What do you expect counter to equal? What value is it showing? Why do you think this is happening?
-
+the counter value is expected to be the same as N
+the value showing is 1
+this could be happenign because the counter isnt static
 
