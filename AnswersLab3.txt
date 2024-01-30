@@ -1,0 +1,41 @@
+Answers for Lab 2
+-----------------------------------------------
+
+
+
+EXERCISE 1
+
+1. Should instance variable interestRate be declared as static? Explain.
+
+2. Write the output from the test harness for class SavingsAccount. 
+
+
+
+EXERCISE 2
+
+3. Which method(s) of the class CheckingAccount demonstrate overriding? Which methods demonstrate overloading?
+
+4. Is bacc0 = chacc1 legal? Why?
+
+5. Is chacc1 = bacc1 legal? Why?
+
+6. On which variables bacc1, chacc1, sacc1 was the invocation to method
+deductFees() valid? Explain.
+
+7. Which compilation error(s) could be fixed through casting? Which one(s)
+could not be fixed? Why?
+
+8. Why did the program crash? What kind of exception was thrown?
+
+9. What was the runtime error obtained when changing super.deposit(amount)
+to deposit(amount) in class CheckingAccount.java? 
+
+
+
+EXERCISE 3
+
+10. Why does the compiler issue an error message when invoking newAcc.getTransactionCount()? Why does the compiler issue an error message when invoking newAcc.getInterestRate()?
+
+11. Can you tell whether in the statement String accountInfo = newAcc.toString(); the
+method toString() being invoked is from the class CheckingAccount or from the class
+SavingsAccount? Explain your answer.
