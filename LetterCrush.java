@@ -1,5 +1,5 @@
 public class LetterCrush {
-    public static final char EMPTY = ' ';
+    public static final char EMPTY = ' ';   
     private char[][] grid;
 
     public LetterCrush(int width, int height, String initial) {
