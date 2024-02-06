@@ -32,26 +32,37 @@ public class LetterCrush {
         }
     }   
 
-
+    /**
+     * Returns a string of tlettercrushes grid and letters within it.
+     * 
+     * @return String representation of lettercrushes grid and letters within it.
+     */
     public String toString() {
-        String returnString = "LetterCrush\n";
+        String returnString = "LetterCrush\n";  //Return String
     
         for (int row = 0; row < grid.length; row++) {
             returnString += "|";
-            for (int col = 0; col < grid[row].length; col++) {
+            for (int col = 0; col < grid[row].length; col++) {  //Grid content.
                 returnString += grid[row][col];
             }
-            returnString += "|" + row + "\n";
+            returnString += "|" + row + "\n"; //Adds row numbers.
         }
-        
+
+        //Format column numbers.
         returnString += "+";
         for (int col = 0; col < grid[0].length; col++) {
             returnString += col;
         }
         returnString += "+";
+
         return returnString;
     }
     
+    /**
+     * Determines wether the grid of lettercrush is stable or not.
+     * 
+     * @return True if the grid is stable and false if it isnt.
+     */
     public boolean isStable() {
         for (int col = 0; col < grid[0].length; col++) {
             for (int row = grid.length - 2; row >= 0; row--) {
@@ -63,6 +74,9 @@ public class LetterCrush {
         return true;
     }
 
+    /**
+     * Moves letters down to fill empty spaces
+     */
     public void applyGravity() {
         for (int col = 0; col < grid[0].length; col++) {
             for (int row = grid.length - 2; row >= 0; row--) {
@@ -74,16 +88,24 @@ public class LetterCrush {
         }
     }
 
+    /**
+     * Validates that the line in in the grid then replace it with EMPTY and returns true.
+     * 
+     * @param theLine   Line object wiht start and end coordinates.
+     * @return True if the line is valid which then EMPTIES it, and false if the line isnt valid.
+     */
     public boolean remove(Line theLine) {
-        int rows = grid.length;
-        int cols = grid[0].length;
-        int[] start = theLine.getStart();
-        int[] end = theLine.getEnd();
+        int rows = grid.length;             //Number of rows in grid.
+        int cols = grid[0].length;          //Number of columns in grid.
+        int[] start = theLine.getStart();   //Start coordinates of line.
+        int[] end = theLine.getEnd();       //End coordinates of line.
 
+        //Validates that line is on grid.
         if (start[0] < 0 || start[0] >= rows || start[1] < 0 || start[1] >= cols || end[0] < 0 || end[0] >= rows || end[1] < 0 || end[1] >= cols) {
             return false;
         }
 
+        //Removes line from grid with EMPTY space.
         for (int row = start[0]; row <= end[0]; row++) {
             for (int col = start[1]; col <= end[1]; col++) {
                 grid[row][col] = EMPTY;
@@ -92,42 +114,56 @@ public class LetterCrush {
         return true;
     }
 
+    /**
+     * Returns a string of tlettercrushes grid and letters within it, with theLine being in lowercase.
+     * 
+     * @param theLine   Line of letters that will be lowercase.
+     * @return String representation of lettercrushes grid and letters within it, with theLine being in lowercase.
+     */
     public String toString(Line theLine) {
-        String returnString = "CrushLine\n";
+        String returnString = "CrushLine\n";    //Return string.
     
         for (int row = 0; row < grid.length; row++) {
             returnString += "|";
-            for (int col = 0; col < grid[row].length; col++) {
-                if (theLine.inLine(row, col)) {
+            for (int col = 0; col < grid[row].length; col++) {  //Grid content.
+                if (theLine.inLine(row, col)) {     //Make letter lower case if it is in theLine.
                     returnString += Character.toLowerCase(grid[row][col]);
                 } else {
                     returnString += grid[row][col];
                 }
             }
-            returnString += "|" + row + "\n";
+            returnString += "|" + row + "\n"; //Adds row numbers.
         }
     
+        //Format column numbers.
         returnString += "+";
         for (int col = 0; col < grid[0].length; col++) {
             returnString += col;
         }
-        returnString += "+";        
+        returnString += "+";  
+
         return returnString;
     }
 
+    /**
+     * Returns the longest line on the grid, and null if there isnt a line longer than 3 letters.
+     * 
+     * @return The longest line on the grid, and null if there isnt a line longer than 3 letters.
+     */
     public Line longestLine() {
-        Line longestLine = null;
-        int largest = 0;
+        Line longestLine = null;    //Line of the longest line in the grid.
+        int largest = 0;            //Counter for length of line.
 
+        //Scan first the rows of the grid from bottom to top.
         for (int row = grid.length - 1; row >= 0; row--) {
-            char current = grid[row][0];
-            int letterCount = 1;
+            char current = grid[row][0];    //Current char.
+            int letterCount = 1;            //Counter for lettes in line.
         
             for (int col = 1; col < grid[row].length; col++) {
                 if (grid[row][col] == current && current != EMPTY) {
                     letterCount++;
         
-                    if (letterCount > largest) {
+                    if (letterCount > largest) {    //Stores line if it is larger than the largest.
                         largest = letterCount;
                         longestLine = new Line(row, col - letterCount + 1, true, letterCount);
                     }
@@ -138,15 +174,16 @@ public class LetterCrush {
             }
         }
 
+        //Scans the columns from left to right; each column is scanned from the bottom to the top.
         for (int col = 0; col < grid[0].length; col++) {
-            char current = grid[grid.length - 1][col];
-            int letterCount = 1;
+            char current = grid[grid.length - 1][col];  //Current char.
+            int letterCount = 1;                        //Counter for lettes in line.
         
             for (int row = grid.length - 2; row >= 0; row--) {
                 if (grid[row][col] == current && current != EMPTY) {
                     letterCount++;
         
-                    if (letterCount > largest) {
+                    if (letterCount > largest) {    //Stores line if it is larger than the largest.
                         largest = letterCount;
                         longestLine = new Line(row, col, false, letterCount);
                     }
@@ -157,6 +194,7 @@ public class LetterCrush {
             }
         }
         
+        //Counts the largest line as the largest line if it has at least 3 letters in it.
         if (largest >= 3) {
             return longestLine;
         } else {
@@ -164,12 +202,18 @@ public class LetterCrush {
         }
     }
 
+    /**
+     * Cascades the longest line on the grid by removing the longest line and dropping letters, and repeating the process till there is no longest line.
+     */
     public void cascade() {
-        Line longestLine = longestLine();
+        Line longestLine = longestLine();   //Longest line in the grid.
 
-        while (longestLine != null && longestLine.length() >= 3) {
+        //While there is a longest line remove it until there isnt a longest line in the grid.
+        while (longestLine != null) {  
             remove(longestLine);
-            applyGravity();
+            while (isStable() != true) {
+                applyGravity();
+            }
             longestLine = longestLine();
         }
     }
