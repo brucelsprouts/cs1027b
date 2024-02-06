@@ -17,7 +17,7 @@ public class Line {
      * @param length        Length of line.
      */
     public Line(int row, int col, boolean horizontal, int length) {
-        start = new int[]{row, col};
+        start = new int[]{row, col};    //Start coordinate.
 
         if (horizontal) {                               //Horizontal line.
             end = new int[]{row, col + length - 1};
@@ -27,7 +27,7 @@ public class Line {
     }
 
     /**
-     * Gets the startting coordinates of the line.
+     * Gets the starting coordinates of the line.
      * 
      * @return Start coordinates of line.
      */
@@ -50,7 +50,7 @@ public class Line {
      * @return Length of a line.
      */
     public int length() {
-        if (start[0] == end[0]) {           //Hozontal line.
+        if (start[0] == end[0]) {           //Horizontal line.
             return end[1] - start[1] + 1;
         } else if (start[1] == end[1]) {    //Vertical Line.
             return end[0] - start[0] + 1;
@@ -60,7 +60,7 @@ public class Line {
     }
 
     /**
-     * Determines and returns if the line is hoziontal or vertical
+     * Determines and returns if the line is horizontal or vertical
      * 
      * @return True if line is horizontal and false if it is vertical.
      */
@@ -76,7 +76,7 @@ public class Line {
      * @return True if line is vertical or horizontal
      */
     public boolean inLine(int row, int col) {
-        if (isHorizontal()) {                                               //Hozontal line.
+        if (isHorizontal()) {                                               //Horizontal line.
             return start[0] == row && start[1] <= col && col <= end[1];
         } else {                                                            //Vertical line.
             return start[1] == col && start[0] <= row && row <= end[0];
