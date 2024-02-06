@@ -1,6 +1,5 @@
 public class Line {
-    private int[] start;
-    private int[] end;
+    private int[] start, end;
 
     public Line(int row, int col, boolean horizontal, int length) {
         start = new int[]{row, col};

@@ -1,5 +1,5 @@
 public class LetterCrush {
-        private char[][] grid;
+    private char[][] grid;
     public static final char EMPTY = ' ';   
 
     public LetterCrush(int width, int height, String initial) {
@@ -95,7 +95,7 @@ public class LetterCrush {
         for (int col = 0; col < grid[0].length; col++) {
             returnString += col;
         }
-        returnString += "+";
+        returnString += "+";        
         return returnString;
     }
 
@@ -103,42 +103,44 @@ public class LetterCrush {
         Line longestLine = null;
         int largest = 0;
 
-        for (int i = grid.length - 1; i >= 0; i--) {
-            char letter = grid[i][0];
-            int adjacent = 1;
-
-            for (int j = 1; j < grid[i].length; j++) {
-                if (grid[i][j] == letter && letter != EMPTY) {
-                    adjacent++;
-                    if (adjacent > largest) {
-                        largest = adjacent;
-                        longestLine = new Line(i, j - adjacent + 1, true, adjacent);
+        for (int row = grid.length - 1; row >= 0; row--) {
+            char current = grid[row][0];
+            int letterCount = 1;
+        
+            for (int col = 1; col < grid[row].length; col++) {
+                if (grid[row][col] == current && current != EMPTY) {
+                    letterCount++;
+        
+                    if (letterCount > largest) {
+                        largest = letterCount;
+                        longestLine = new Line(row, col - letterCount + 1, true, letterCount);
                     }
                 } else {
-                    letter = grid[i][j];
-                    adjacent = 1;
+                    current = grid[row][col];
+                    letterCount = 1;
                 }
             }
         }
 
-        for (int j = 0; j < grid[0].length; j++) {
-            char letter = grid[grid.length - 1][j];
-            int adjacent = 1;
-
-            for (int i = grid.length - 2; i >= 0; i--) {
-                if (grid[i][j] == letter && letter != EMPTY) {
-                    adjacent++;
-                    if (adjacent > largest) {
-                        largest = adjacent;
-                        longestLine = new Line(i, j, false, adjacent);
+        for (int col = 0; col < grid[0].length; col++) {
+            char current = grid[grid.length - 1][col];
+            int letterCount = 1;
+        
+            for (int row = grid.length - 2; row >= 0; row--) {
+                if (grid[row][col] == current && current != EMPTY) {
+                    letterCount++;
+        
+                    if (letterCount > largest) {
+                        largest = letterCount;
+                        longestLine = new Line(row, col, false, letterCount);
                     }
                 } else {
-                    letter = grid[i][j];
-                    adjacent = 1;
+                    current = grid[row][col];
+                    letterCount = 1;
                 }
             }
         }
-
+        
         if (largest >= 3) {
             return longestLine;
         } else {
