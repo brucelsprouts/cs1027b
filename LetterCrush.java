@@ -17,8 +17,8 @@ public class LetterCrush {
      * @param   initial Initial list of letters being put into grid.
      */
     public LetterCrush(int width, int height, String initial) {
-        grid = new char[height][width]; //Initilize grid.
-        int index = 0;  //Index of letter in initial
+        grid = new char[height][width]; //Initialize grid.
+        int index = 0;                  //Index of letter in initial
 
         //Places letters in grid from the top left of the grid to right,repeating layer by layer till there are no more letters in initial.
         for (int row = 0; row < height; row++) {
@@ -33,9 +33,9 @@ public class LetterCrush {
     }   
 
     /**
-     * Returns a string of tlettercrushes grid and letters within it.
+     * Returns a string of letterCrushes grid and letters within it.
      * 
-     * @return String representation of lettercrushes grid and letters within it.
+     * @return String representation of letterCrushes grid and letters within it.
      */
     public String toString() {
         String returnString = "LetterCrush\n";  //Return String
@@ -59,9 +59,9 @@ public class LetterCrush {
     }
     
     /**
-     * Determines wether the grid of lettercrush is stable or not.
+     * Determines wether the grid of letterCrush is stable or not.
      * 
-     * @return True if the grid is stable and false if it isnt.
+     * @return True if the grid is stable and false if it isn't.
      */
     public boolean isStable() {
         for (int col = 0; col < grid[0].length; col++) {
@@ -91,8 +91,8 @@ public class LetterCrush {
     /**
      * Validates that the line in in the grid then replace it with EMPTY and returns true.
      * 
-     * @param theLine   Line object wiht start and end coordinates.
-     * @return True if the line is valid which then EMPTIES it, and false if the line isnt valid.
+     * @param theLine   Line object with start and end coordinates.
+     * @return True if the line is valid which then EMPTIES it, and false if the line isn't valid.
      */
     public boolean remove(Line theLine) {
         int rows = grid.length;             //Number of rows in grid.
@@ -115,10 +115,10 @@ public class LetterCrush {
     }
 
     /**
-     * Returns a string of tlettercrushes grid and letters within it, with theLine being in lowercase.
+     * Returns a string of letterCrushes grid and letters within it, with theLine being in lowercase.
      * 
      * @param theLine   Line of letters that will be lowercase.
-     * @return String representation of lettercrushes grid and letters within it, with theLine being in lowercase.
+     * @return String representation of letterCrushes grid and letters within it, with theLine being in lowercase.
      */
     public String toString(Line theLine) {
         String returnString = "CrushLine\n";    //Return string.
@@ -146,9 +146,9 @@ public class LetterCrush {
     }
 
     /**
-     * Returns the longest line on the grid, and null if there isnt a line longer than 3 letters.
+     * Returns the longest line on the grid, and null if there isn't a line longer than 3 letters.
      * 
-     * @return The longest line on the grid, and null if there isnt a line longer than 3 letters.
+     * @return The longest line on the grid, and null if there isn't a line longer than 3 letters.
      */
     public Line longestLine() {
         Line longestLine = null;    //Line of the longest line in the grid.
@@ -157,7 +157,7 @@ public class LetterCrush {
         //Scan first the rows of the grid from bottom to top.
         for (int row = grid.length - 1; row >= 0; row--) {
             char current = grid[row][0];    //Current char.
-            int letterCount = 1;            //Counter for lettes in line.
+            int letterCount = 1;            //Counter for letters in line.
         
             for (int col = 1; col < grid[row].length; col++) {
                 if (grid[row][col] == current && current != EMPTY) {
@@ -177,7 +177,7 @@ public class LetterCrush {
         //Scans the columns from left to right; each column is scanned from the bottom to the top.
         for (int col = 0; col < grid[0].length; col++) {
             char current = grid[grid.length - 1][col];  //Current char.
-            int letterCount = 1;                        //Counter for lettes in line.
+            int letterCount = 1;                        //Counter for letters in line.
         
             for (int row = grid.length - 2; row >= 0; row--) {
                 if (grid[row][col] == current && current != EMPTY) {
@@ -208,7 +208,7 @@ public class LetterCrush {
     public void cascade() {
         Line longestLine = longestLine();   //Longest line in the grid.
 
-        //While there is a longest line remove it until there isnt a longest line in the grid.
+        //While there is a longest line remove it until there isn't a longest line in the grid.
         while (longestLine != null) {  
             remove(longestLine);
             while (isStable() != true) {
