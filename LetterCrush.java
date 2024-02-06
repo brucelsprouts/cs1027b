@@ -49,54 +49,55 @@ public class LetterCrush {
 
     public void applyGravity() {
         for (int col = 0; col < grid[0].length; col++) {
-            for (int row = grid.length - 1; row >= 1; row--) {
-                if (grid[row][col] == EMPTY && grid[row - 1][col] != EMPTY) {
-                    grid[row][col] = grid[row - 1][col];
-                    grid[row - 1][col] = EMPTY;
-                }
-            }
-        }
-    }
-
-
-    public boolean remove(Line theLine) {
-        if (!validLine(theLine)) {
-            return false;
-        }
-
-        for (int row = 0; row < grid.length; row++) {
-            for (int col = 0; col < grid[row].length; col++) {
-                if (theLine.inLine(row, col)) {
+            for (int row = 1; row < grid.length; row++) {
+                if (grid[row][col] != EMPTY && grid[row - 1][col] == EMPTY) {
+                    grid[row - 1][col] = grid[row][col];
                     grid[row][col] = EMPTY;
                 }
             }
         }
+    }
 
+    public boolean remove(Line theLine) {
+        int rows = grid.length;
+        int cols = grid[0].length;
+        int[] start = theLine.getStart();
+        int[] end = theLine.getEnd();
+
+        if (start[0] < 0 || start[0] >= rows || start[1] < 0 || start[1] >= cols || end[0] < 0 || end[0] >= rows || end[1] < 0 || end[1] >= cols) {
+            return false;
+        }
+
+        for (int row = start[0]; row <= end[0]; row++) {
+            for (int col = start[1]; col <= end[1]; col++) {
+                grid[row][col] = EMPTY;
+            }
+        }
         return true;
     }
 
     public String toString(Line theLine) {
-        StringBuilder result = new StringBuilder("CrushLine\n");
-
+        String returnString = "CrushLine\n";
+    
         for (int row = 0; row < grid.length; row++) {
-            result.append("|");
+            returnString += "|";
             for (int col = 0; col < grid[row].length; col++) {
                 if (theLine.inLine(row, col)) {
-                    result.append(Character.toLowerCase(grid[row][col]));
+                    returnString += Character.toLowerCase(grid[row][col]);
                 } else {
-                    result.append(grid[row][col]);
+                    returnString += grid[row][col];
                 }
             }
-            result.append("|").append(row).append("\n");
+            returnString += "|" + row + "\n";
         }
-        result.append("+");
-
+    
+        returnString += "+";
         for (int col = 0; col < grid[0].length; col++) {
-            result.append(col);
+            returnString += col;
         }
-        result.append("+");
-
-        return result.toString();
+        returnString += "+";
+        System.out.print(theLine);
+        return returnString;
     }
 
     public Line longestLine() {
@@ -149,25 +150,14 @@ public class LetterCrush {
     }
 
     public void cascade() {
-        Line longest;
+        Line longestLine;
         
         do {
-            longest = longestLine();
-            if (longest != null) {
-                remove(longest);
+            longestLine = longestLine();
+            if (longestLine != null) {
+                remove(longestLine);
                 applyGravity();
             }
-        } while (longest != null && longest.length() >= 3);
-    }
-
-    private boolean validLine(Line theLine) {
-        int rows = grid.length;
-        int cols = grid[0].length;
-
-        int[] start = theLine.getStart();
-        int[] end = theLine.getEnd();
-
-        return start[0] >= 0 && start[0] < rows && start[1] >= 0 && start[1] < cols &&
-               end[0] >= 0 && end[0] < rows && end[1] >= 0 && end[1] < cols;
+        } while (longestLine != null && longestLine.length() >= 3);
     }
 }
