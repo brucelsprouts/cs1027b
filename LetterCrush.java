@@ -1,21 +1,37 @@
+/**
+ * Class that represents the grid of LetterCrush, its grids dimensions, gravity for letters, as well as other methods.
+ * 
+ * @author Bruce lin
+ * Created on 2024/02/06
+ */
+
 public class LetterCrush {
     private char[][] grid;
     public static final char EMPTY = ' ';   
 
+    /**
+     * Constructor to initialize a grid's dimensions with given letters in it.
+     * 
+     * @param   width   Width of grid.
+     * @param   height  Height of grid.
+     * @param   initial Initial list of letters being put into grid.
+     */
     public LetterCrush(int width, int height, String initial) {
-        grid = new char[height][width];
-        int index = 0;
+        grid = new char[height][width]; //Initilize grid.
+        int index = 0;  //Index of letter in initial
 
+        //Places letters in grid from the top left of the grid to right,repeating layer by layer till there are no more letters in initial.
         for (int row = 0; row < height; row++) {
             for (int col = 0; col < width; col++) {
                 if (index < initial.length()) {
                     grid[row][col] = initial.charAt(index++);
                 } else {
-                    grid[row][col] = EMPTY;
+                    grid[row][col] = EMPTY; //Creates empty space on grid when letters run out.
                 }
             }
         }
     }   
+
 
     public String toString() {
         String returnString = "LetterCrush\n";
