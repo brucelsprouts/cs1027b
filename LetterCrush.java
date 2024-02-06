@@ -38,8 +38,8 @@ public class LetterCrush {
     
     public boolean isStable() {
         for (int col = 0; col < grid[0].length; col++) {
-            for (int row = 1; row < grid.length; row++) {
-                if (grid[row][col] != EMPTY && grid[row - 1][col] == EMPTY) {
+            for (int row = grid.length - 2; row >= 0; row--) {
+                if (grid[row][col] != EMPTY && grid[row + 1][col] == EMPTY) {
                     return false;
                 }
             }
@@ -49,9 +49,9 @@ public class LetterCrush {
 
     public void applyGravity() {
         for (int col = 0; col < grid[0].length; col++) {
-            for (int row = 1; row < grid.length; row++) {
-                if (grid[row][col] != EMPTY && grid[row - 1][col] == EMPTY) {
-                    grid[row - 1][col] = grid[row][col];
+            for (int row = grid.length - 2; row >= 0; row--) {
+                if (grid[row][col] != EMPTY && grid[row + 1][col] == EMPTY) {
+                    grid[row + 1][col] = grid[row][col];
                     grid[row][col] = EMPTY;
                 }
             }
@@ -96,7 +96,6 @@ public class LetterCrush {
             returnString += col;
         }
         returnString += "+";
-        System.out.print(theLine);
         return returnString;
     }
 
@@ -104,39 +103,37 @@ public class LetterCrush {
         Line longestLine = null;
         int largest = 0;
 
-        for (int row = grid.length - 1; row >= 0; row--) {
-            char letter = grid[row][0];
+        for (int i = grid.length - 1; i >= 0; i--) {
+            char letter = grid[i][0];
             int adjacent = 1;
 
-            for (int col = 1; col < grid[row].length; col++) {
-                if (grid[row][col] == letter && letter != EMPTY) {
+            for (int j = 1; j < grid[i].length; j++) {
+                if (grid[i][j] == letter && letter != EMPTY) {
                     adjacent++;
-
                     if (adjacent > largest) {
                         largest = adjacent;
-                        longestLine = new Line(row, col - adjacent + 1, true, adjacent);
+                        longestLine = new Line(i, j - adjacent + 1, true, adjacent);
                     }
                 } else {
-                    letter = grid[row][col];
+                    letter = grid[i][j];
                     adjacent = 1;
                 }
             }
         }
 
-        for (int col = 0; col < grid[0].length; col++) {
-            char letter = grid[grid.length - 1][col];
+        for (int j = 0; j < grid[0].length; j++) {
+            char letter = grid[grid.length - 1][j];
             int adjacent = 1;
 
-            for (int row = grid.length - 2; row >= 0; row--) {
-                if (grid[row][col] == letter && letter != EMPTY) {
+            for (int i = grid.length - 2; i >= 0; i--) {
+                if (grid[i][j] == letter && letter != EMPTY) {
                     adjacent++;
-
                     if (adjacent > largest) {
                         largest = adjacent;
-                        longestLine = new Line(row - adjacent + 1, col, false, adjacent);
+                        longestLine = new Line(i, j, false, adjacent);
                     }
                 } else {
-                    letter = grid[row][col];
+                    letter = grid[i][j];
                     adjacent = 1;
                 }
             }
@@ -150,14 +147,12 @@ public class LetterCrush {
     }
 
     public void cascade() {
-        Line longestLine;
-        
-        do {
+        Line longestLine = longestLine();
+
+        while (longestLine != null && longestLine.length() >= 3) {
+            remove(longestLine);
+            applyGravity();
             longestLine = longestLine();
-            if (longestLine != null) {
-                remove(longestLine);
-                applyGravity();
-            }
-        } while (longestLine != null && longestLine.length() >= 3);
+        }
     }
 }
