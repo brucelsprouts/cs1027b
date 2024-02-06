@@ -23,10 +23,10 @@ public class LetterCrush {
         //Places letters in grid from the top left of the grid to right,repeating layer by layer till there are no more letters in initial.
         for (int row = 0; row < height; row++) {
             for (int col = 0; col < width; col++) {
-                if (index < initial.length()) {
+                if (index < initial.length()) { //Places letter in grid if the initial string contains more letters.
                     grid[row][col] = initial.charAt(index++);
-                } else {
-                    grid[row][col] = EMPTY; //Creates empty space on grid when letters run out.
+                } else {    //Creates empty space on grid when letters run out.
+                    grid[row][col] = EMPTY; 
                 }
             }
         }
@@ -40,9 +40,9 @@ public class LetterCrush {
     public String toString() {
         String returnString = "LetterCrush\n";  //Return String
     
-        for (int row = 0; row < grid.length; row++) {
+        for (int row = 0; row < grid.length; row++) {   //Iterates through each row.
             returnString += "|";
-            for (int col = 0; col < grid[row].length; col++) {  //Grid content.
+            for (int col = 0; col < grid[row].length; col++) {  //Displays letter for each column in row.
                 returnString += grid[row][col];
             }
             returnString += "|" + row + "\n"; //Adds row numbers.
@@ -66,7 +66,7 @@ public class LetterCrush {
     public boolean isStable() {
         for (int col = 0; col < grid[0].length; col++) {
             for (int row = grid.length - 2; row >= 0; row--) {
-                if (grid[row][col] != EMPTY && grid[row + 1][col] == EMPTY) {
+                if (grid[row][col] != EMPTY && grid[row + 1][col] == EMPTY) {   //If the grid under a grid with a letter is empty, return false.
                     return false;
                 }
             }
@@ -80,7 +80,7 @@ public class LetterCrush {
     public void applyGravity() {
         for (int col = 0; col < grid[0].length; col++) {
             for (int row = grid.length - 2; row >= 0; row--) {
-                if (grid[row][col] != EMPTY && grid[row + 1][col] == EMPTY) {
+                if (grid[row][col] != EMPTY && grid[row + 1][col] == EMPTY) {   //If the grid under a grid with a letter is empty, drop the letter.
                     grid[row + 1][col] = grid[row][col];
                     grid[row][col] = EMPTY;
                 }
@@ -123,9 +123,9 @@ public class LetterCrush {
     public String toString(Line theLine) {
         String returnString = "CrushLine\n";    //Return string.
     
-        for (int row = 0; row < grid.length; row++) {
+        for (int row = 0; row < grid.length; row++) {   //Iterates through each row.
             returnString += "|";
-            for (int col = 0; col < grid[row].length; col++) {  //Grid content.
+            for (int col = 0; col < grid[row].length; col++) {  //Displays letter for each column in row.
                 if (theLine.inLine(row, col)) {     //Make letter lower case if it is in theLine.
                     returnString += Character.toLowerCase(grid[row][col]);
                 } else {
