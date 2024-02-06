@@ -147,54 +147,63 @@ public class LetterCrush {
 
     /**
      * Returns the longest line on the grid, and null if there isn't a line longer than 3 letters.
+     * If there are multiple lines with the same length, it returns the first encountered.
      * 
      * @return The longest line on the grid, and null if there isn't a line longer than 3 letters.
      */
     public Line longestLine() {
-        Line longestLine = null;    //Line of the longest line in the grid.
-        int largest = 0;            //Counter for length of line.
-
-        //Scan first the rows of the grid from bottom to top.
+        Line longestLine = null;    //Longest line to null.
+        int largest = 0;            //Counter for the length of the line.
+    
+        //Scan rows from bottom to top.
         for (int row = grid.length - 1; row >= 0; row--) {
-            char current = grid[row][0];    //Current char.
-            int letterCount = 1;            //Counter for letters in line.
-        
+            char current = grid[row][0];    //Character at the start of the row.
+            int letterCount = 1;            //Counter for letters in the line.
+    
+            //Iterate through the columns within the row.
             for (int col = 1; col < grid[row].length; col++) {
                 if (grid[row][col] == current && current != EMPTY) {
-                    letterCount++;
-        
-                    if (letterCount > largest) {    //Stores line if it is larger than the largest.
-                        largest = letterCount;
+                    letterCount++;    //Increment letter count if the current character matches the previous one.
+    
+                    //If the current letter count is greater than the largest, make it the longest line.
+                    if (letterCount > largest) {
+                        largest = letterCount;    //Updates the largest length.
+                        //Create a new Line object representing the longest line in the row.
                         longestLine = new Line(row, col - letterCount + 1, true, letterCount);
                     }
                 } else {
+                    //If the current character is different from the previous one, reset the letter count.
                     current = grid[row][col];
                     letterCount = 1;
                 }
             }
         }
-
-        //Scans the columns from left to right; each column is scanned from the bottom to the top.
+    
+        //Scan columns from left to right.
         for (int col = 0; col < grid[0].length; col++) {
-            char current = grid[grid.length - 1][col];  //Current char.
-            int letterCount = 1;                        //Counter for letters in line.
-        
+            char current = grid[grid.length - 1][col];  //Character at the bottom of the column.
+            int letterCount = 1;                        //Counter for letters in the line.
+    
+            //Iterate through the rows within the column.
             for (int row = grid.length - 2; row >= 0; row--) {
                 if (grid[row][col] == current && current != EMPTY) {
-                    letterCount++;
-        
-                    if (letterCount > largest) {    //Stores line if it is larger than the largest.
-                        largest = letterCount;
+                    letterCount++;    //Increment the letter count if the current character matches the previous one.
+    
+                    //If the current letter count is greater than the largest, update the longest line.
+                    if (letterCount > largest) {
+                        largest = letterCount;    //Update the largest length.
+                        //Create a new Line object representing the longest line in the column.
                         longestLine = new Line(row, col, false, letterCount);
                     }
                 } else {
+                    //If the current character is different from the previous one, reset the letter count.
                     current = grid[row][col];
                     letterCount = 1;
                 }
             }
         }
         
-        //Counts the largest line as the largest line if it has at least 3 letters in it.
+        //If the longest line has at least 3 letters, return it, if not return null.
         if (largest >= 3) {
             return longestLine;
         } else {
