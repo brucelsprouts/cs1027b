@@ -5,7 +5,7 @@
  * Created on 2024/02/06
  */
 
-public class LetterCrush {
+ public class LetterCrush {
     private char[][] grid;
     public static final char EMPTY = ' ';   
 

@@ -5,7 +5,7 @@
  * Created on 2024/02/06
  */
 
-public class Line {
+ public class Line {
     private int[] start, end;
 
     /**
