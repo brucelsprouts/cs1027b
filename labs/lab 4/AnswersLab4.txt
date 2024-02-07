@@ -1,0 +1,55 @@
+Answers for Lab 4
+-----------------------------------------------
+
+
+
+EXERCISE 1
+
+1. Explain why there is a compiler error on each of the following lines.
+
+a) Line 12
+There is no return statement int he continueLooping method when k is not less than NUM_ITEMS.
+
+b) Line 42
+The variable NUM_ITEMS is declared as final and cant be reassigned.
+
+c) Line 54
+There is a missing semicolon at the end fo the if statement.
+
+2. Why is there now a compiler error on Line 35?
+The NUM_ITEMS variable is declared as final and cant be reassigned, which is being called in the main method.
+
+3. Why is there a warning on Line 36?
+Because hte variable done isn't used in the code.
+
+4. Why is k incrementing in m1 but not updating in main?
+Variable k is incrementing in the method m1, but it was not being updated in the main method because it was not incremented after the call to m1.
+
+
+EXERCISE 2
+
+5. Why did testArray[0][0] not change?
+It didn't change because the loop initializing j starts from 1 and not 0, which causes the first column of each row in testArray to not be initialized.
+
+6. What are the values of i and j? Is it correct that the program tries to store the value (i+1)*j in testArray[i][j]?
+The values of i and j are 0 and 5, its correct because the program tries to store the value (i+j)*j in testArray[i][j], however the loop initialized where j was didn't start at 0.
+
+EXERCISE 3
+
+7. What do you expect to be printed out from the 3 print statements?
+The first to print the value of a the second to print the local variable b in the main method and the third to print the static variable b of the VariableScope class.
+
+8. What values were actually printed out from the 3 print statements?
+2, 9, and 3
+
+EXERCISE 4
+
+9. Write the type of exception (i.e. NullPointerException) that occurs from each of the 5 cases:
+a) NullPointerException
+b) ArrayIndexOutOfBoundsException
+c) ArithmeticException
+d) ClassCastException
+e) NumberFormatException
+
+10. How many exceptions occurred? What type(s) are they? Why aren't the other exceptions being thrown?
+When all 5 lines run, only the exception from the first line (a) happens, a NullPointerException. The other lines don't throw exceptions because once one happens, the program stops running further lines. So, lines b), c), d), and e) don't cause exceptions because the program doesn't reach them.
