@@ -7,41 +7,44 @@ EXERCISE 1
 1. Write your predictions of the output from each of the 3 cases:
 
 Case i):
+ABDFG
+
 Case ii): 
+ABEXFG
+
 Case iii): 
-
-
+ABCFG
 
 2. Were you correct in your predictions above?
-
-
+yes
 
 3. Write your predictions of the output from each of the 3 cases:
 
 Case i):
+ABXCFG
+
 Case ii): 
+ABEFG
+
 Case iii): 
-
-
+ABCFG
 
 4. Were you correct in your predictions above?
-
-
+yes
 
 EXERCISE 2
 
-
 5. When i begins at 20, why are we not seeing 20 nodes printed out? How many nodes are in the linked list?
-
-
+when i starts at 20, only 10 nodes are printed because the printList() method is programmed to display only 10 nodes. although 20 nodes are created, only the first 10 are shown. regardless, the linked list still contains 20 nodes.
 
 6. When i begins at 5, why does the program crash after printing out the number 5? How many nodes are in the linked list? What kind of exception is thrown here?
-
-
+when i starts at 5, the program crashes after printing 5 because the loop generates nodes from 5 to 1, while the printList() method is configured to print only 10 nodes. attempting to access a node beyond this range results in a nullpointerexception. prior to the crash, only 5 nodes are added to the linked list.
 
 EXERCISE 3
 
-
 7. What are the 4 possible cases we need to consider? What would curr be equal to (or NOT equal to) in each of these 4 cases?
-
+Removing an internal node: curr is equal to the node to be removed, and it's neither front nor rear.
+Removing the front node: curr is equal to the front node but not equal to rear.
+Removing the rear node: curr is equal to the rear node but not equal to front.
+Attempting to remove a non-existent node: curr is null.
 

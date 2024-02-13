@@ -7,8 +7,8 @@ public class Exceptions {
 		try {
 			System.out.print("B");
 			
-			P[x] = 5;
-			//method2(P, x);
+			//P[x] = 5;
+			method2(P, x);
 			
 			System.out.print("C");
 		} catch (ArrayIndexOutOfBoundsException e) {
