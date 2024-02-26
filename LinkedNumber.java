@@ -16,24 +16,18 @@ public class LinkedNumber {
      * @throws LinkedNumberException if num is empty.
      */
     public LinkedNumber(String num, int baseNum) {
-        base = baseNum;
-        
         if (num.isEmpty()) {
             throw new LinkedNumberException("no digits given");
         }
         
-        char[] digits = num.toCharArray();
+        base = baseNum;
+        front = rear = null;
         
-        front = null;
-        rear = null;
-        for (char digit : digits) {
-            Digit d = new Digit(digit);
-            
-            DLNode<Digit> newNode = new DLNode<>(d);
+        for (char digit : num.toCharArray()) {
+            DLNode<Digit> newNode = new DLNode<>(new Digit(digit));
             
             if (front == null) {
-                front = newNode;
-                rear = newNode;
+                front = rear = newNode;
             } else {
                 rear.setNext(newNode);
                 newNode.setPrev(rear);
@@ -132,9 +126,12 @@ public class LinkedNumber {
      * @return true if the two objects are equal and false if they are not.
      */
     public boolean equals(LinkedNumber other) {
+        // Check base and number of digits
         if (this.base != other.getBase() || this.getNumDigits() != other.getNumDigits()) {
             return false;
         }
+    
+        // Check each digit
         DLNode<Digit> currentThis = this.front;
         DLNode<Digit> currentOther = other.getFront();
         while (currentThis != null) {
@@ -144,8 +141,10 @@ public class LinkedNumber {
             currentThis = currentThis.getNext();
             currentOther = currentOther.getNext();
         }
-        return true;
+    
+        return true; // Numbers are equal
     }
+    
 
     /**
      * Converts the number to a new base.
@@ -154,39 +153,43 @@ public class LinkedNumber {
      * @return a new LinkedNumber object that represents the new converted number.
      * @throws LinkedNumberException if the number is invalid and cant be converted.
      */
-    public LinkedNumber convert(int newBase) {
-        if (!isValidNumber()) {
-            throw new LinkedNumberException("cannot convert invalid number");
-        }
-    
-        int value = 0;
+        public LinkedNumber convert(int newBase) {
+            if (!isValidNumber()) {
+                throw new LinkedNumberException("Cannot convert invalid number");
+            }
+        
+            int value = 0;
         int position = 0;
         DLNode<Digit> current = rear;
     
+        // Convert to base 10
         while (current != null) {
             value += current.getElement().getValue() * Math.pow(base, position);
             current = current.getPrev();
             position++;
         }
     
+        // Convert to new base
         StringBuilder sb = new StringBuilder();
-        while (value > 0) {
+        do {
             int remainder = value % newBase;
             if (remainder >= 10) {
                 char hexChar = (char) ('A' + (remainder - 10));
-                sb.insert(0, hexChar);  
+                sb.insert(0, hexChar);
             } else {
                 sb.insert(0, remainder);
             }
             value /= newBase;
-        }
+        } while (value > 0);
     
+        // Handle case when the value is 0
         if (sb.length() == 0) {
             sb.append(0);
         }
     
         return new LinkedNumber(sb.toString(), newBase);
     }
+    
     
     /**
      * Adds a digit at the specified position in the number.
