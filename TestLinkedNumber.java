@@ -101,12 +101,14 @@ public class TestLinkedNumber {
 		
 		String f = traverseForward(ln.getFront());
 		String b = traverseBackward(ln.getRear());
+
 		return f.equals("5AB9CD37") && b.equals("73DC9BA5") && b1 && b2 && b3 && b4;
 	}
 
 	private static boolean test10 () {
 		LinkedNumber ln = new LinkedNumber("32175267", 8);
 		int v1 = ln.removeDigit(7);
+		System.out.println(v1);
 		boolean b1 = ln.toString().equals("2175267");
 		int v2 = ln.removeDigit(0);
 		boolean b2 = ln.toString().equals("217526");
@@ -118,6 +120,7 @@ public class TestLinkedNumber {
 
 		String f = traverseForward(ln.getFront());
 		String b = traverseBackward(ln.getRear());
+
 		return f.equals("21526") && b.equals("62512") && b1 && b2 && b3 && b4 && b5 && b6;
 	}
 	

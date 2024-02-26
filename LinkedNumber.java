@@ -5,34 +5,25 @@ public class LinkedNumber {
     private DLNode<Digit> rear;
 
     public LinkedNumber(String num, int baseNum) {
-            // Step 1: Assign baseNum to the instance variable base
         base = baseNum;
         
-        // Step 2: Check if num is empty
         if (num.isEmpty()) {
             throw new LinkedNumberException("no digits given");
         }
         
-        // Step 3: Convert the string num into an array of characters
         char[] digits = num.toCharArray();
         
-        // Step 4: Initialize a doubly linked list
         front = null;
         rear = null;
         for (char digit : digits) {
-            // Create a Digit object for each character
             Digit d = new Digit(digit);
             
-            // Create a DLNode to store the Digit object
             DLNode<Digit> newNode = new DLNode<>(d);
             
-            // Connect the new node to the existing linked list
             if (front == null) {
-                // If the list is empty, set both front and rear to the new node
                 front = newNode;
                 rear = newNode;
             } else {
-                // Otherwise, add the new node to the end of the list
                 rear.setNext(newNode);
                 newNode.setPrev(rear);
                 rear = newNode;
@@ -108,35 +99,53 @@ public class LinkedNumber {
         if (!isValidNumber()) {
             throw new LinkedNumberException("cannot convert invalid number");
         }
-        // Convert the number to decimal first
-        LinkedNumber decimalNumber = new LinkedNumber(toString(), this.base);
+    
         int value = 0;
         int position = 0;
-        DLNode<Digit> current = decimalNumber.getRear();
+        DLNode<Digit> current = rear;
+    
         while (current != null) {
-            value += current.getElement().getValue() * Math.pow(this.base, position);
-            current = current.getNext();
+            value += current.getElement().getValue() * Math.pow(base, position);
+            current = current.getPrev();
             position++;
         }
-        // Convert the decimal value to the new base
+    
         StringBuilder sb = new StringBuilder();
         while (value > 0) {
-            sb.insert(0, value % newBase);
+            int remainder = value % newBase;
+            if (remainder >= 10) {
+                char hexChar = (char) ('A' + (remainder - 10));
+                sb.insert(0, hexChar);  
+            } else {
+                sb.insert(0, remainder);
+            }
             value /= newBase;
         }
-        // Handle the case where the value is zero
+    
         if (sb.length() == 0) {
             sb.append(0);
         }
+    
         return new LinkedNumber(sb.toString(), newBase);
     }
-
+    
     public void addDigit(Digit digit, int position) {
-        if (position < 0 || position > getNumDigits()) {
-            throw new LinkedNumberException("invalid position");
+        if (position < 0 || position > getNumDigits() + 1) {
+            throw new LinkedNumberException("Invalid position");
         }
+    
         DLNode<Digit> newNode = new DLNode<>(digit);
+    
         if (position == 0) {
+            if (rear == null) {
+                rear = newNode;
+                front = newNode;
+            } else {
+                newNode.setPrev(rear);
+                rear.setNext(newNode);
+                rear = newNode;
+            }
+        } else if (position == getNumDigits()) {
             if (front == null) {
                 front = newNode;
                 rear = newNode;
@@ -145,46 +154,69 @@ public class LinkedNumber {
                 front.setPrev(newNode);
                 front = newNode;
             }
-        } else if (position == getNumDigits()) {
-            rear.setNext(newNode);
-            newNode.setPrev(rear);
-            rear = newNode;
         } else {
             DLNode<Digit> current = front;
-            for (int i = 0; i < position - 1; i++) {
+    
+            for (int i = getNumDigits(); i > position; i--) {
                 current = current.getNext();
             }
-            DLNode<Digit> nextNode = current.getNext();
-            current.setNext(newNode);
-            newNode.setPrev(current);
-            newNode.setNext(nextNode);
-            nextNode.setPrev(newNode);
+    
+            DLNode<Digit> prevNode = current.getPrev();
+            newNode.setNext(current);
+            newNode.setPrev(prevNode);
+            current.setPrev(newNode);
+    
+            if (prevNode != null) {
+                prevNode.setNext(newNode);
+            } else {
+                front = newNode;
+            }
         }
     }
-
+    
     public int removeDigit(int position) {
         if (position < 0 || position >= getNumDigits()) {
-            throw new LinkedNumberException("invalid position");
+            throw new LinkedNumberException("Invalid position");
         }
-        DLNode<Digit> current = front;
-        int value = 0;
-        // Traverse to the node at the specified position
+    
+        DLNode<Digit> nodeToRemove;
+
+        if (position == 0) {
+            nodeToRemove = rear;
+            rear = rear.getPrev();
+            if (rear != null) {
+                rear.setNext(null);
+            } else {
+                front = null;
+            }
+        } else if (position == getNumDigits() - 1) {
+            nodeToRemove = front;
+            front = front.getNext();
+            if (front != null) {
+                front.setPrev(null);
+            } else {
+                rear = null;
+            }
+        } else {
+            DLNode<Digit> current = rear;
+            for (int i = 0; i < position; i++) {
+                current = current.getPrev();
+            }
+            nodeToRemove = current;
+            DLNode<Digit> prevNode = current.getPrev();
+            DLNode<Digit> nextNode = current.getNext();
+            prevNode.setNext(nextNode);
+            nextNode.setPrev(prevNode);
+        }
+    
+        int value = nodeToRemove.getElement().getValue();
         for (int i = 0; i < position; i++) {
-            current = current.getNext();
+            value *= base;
         }
-        // Calculate the value of the removed digit
-        value = current.getElement().getValue() * (int) Math.pow(this.base, getNumDigits() - position - 1);
-        // Remove the node
-        if (current.getPrev() != null) {
-            current.getPrev().setNext(current.getNext());
-        } else {
-            front = current.getNext();
-        }
-        if (current.getNext() != null) {
-            current.getNext().setPrev(current.getPrev());
-        } else {
-            rear = current.getPrev();
-        }
+    
         return value;
     }
+    
+    
+    
 }
