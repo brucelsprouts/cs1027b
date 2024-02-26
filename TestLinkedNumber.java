@@ -108,7 +108,6 @@ public class TestLinkedNumber {
 	private static boolean test10 () {
 		LinkedNumber ln = new LinkedNumber("32175267", 8);
 		int v1 = ln.removeDigit(7);
-		System.out.println(v1);
 		boolean b1 = ln.toString().equals("2175267");
 		int v2 = ln.removeDigit(0);
 		boolean b2 = ln.toString().equals("217526");
