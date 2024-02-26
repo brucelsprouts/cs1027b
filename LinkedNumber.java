@@ -9,11 +9,11 @@ public class LinkedNumber {
     private DLNode<Digit> rear;
 
     /**
-     * Constructs a LinkedNumber object with the given number string and base.
+     * Constructs a LinkedNumber object with a given number and base.
      * 
-     * @param num The string representation of the number.
+     * @param num The string of the number.
      * @param baseNum The base of the number system.
-     * @throws LinkedNumberException if the given number string is empty.
+     * @throws LinkedNumberException if num is empty.
      */
     public LinkedNumber(String num, int baseNum) {
         base = baseNum;
@@ -43,7 +43,7 @@ public class LinkedNumber {
     }
 
     /**
-     * Constructs a LinkedNumber object with the given integer value and base 10.
+     * Constructs a LinkedNumber object with a base of 10 and the given int value.
      * 
      * @param num The integer value.
      */
@@ -52,9 +52,9 @@ public class LinkedNumber {
     }
 
     /**
-     * Checks if the number stored in this LinkedNumber object is valid according to its base.
+     * Determine whether or not the number stored in this linked list is a valid positive number for the base number system.
      * 
-     * @return true if the number is valid, false otherwise.
+     * @return true if the number is valid, or false otherwise.
      */
     public boolean isValidNumber() {
         DLNode<Digit> current = front;
@@ -71,25 +71,25 @@ public class LinkedNumber {
     /**
      * Gets the base of the number system.
      * 
-     * @return The base of the number system.
+     * @return the value of base.
      */
     public int getBase() {
         return base;
     }
 
     /**
-     * Gets the front node of the doubly linked list representing the number.
+     * Gets the front node of the doubly linked list.
      * 
-     * @return The front node of the list.
+     * @return the front node
      */
     public DLNode<Digit> getFront() {
         return front;
     }
 
     /**
-     * Gets the rear node of the doubly linked list representing the number.
+     * Gets the rear node of the doubly linked list.
      * 
-     * @return The rear node of the list.
+     * @return the rear node.
      */
     public DLNode<Digit> getRear() {
         return rear;
@@ -98,7 +98,7 @@ public class LinkedNumber {
     /**
      * Gets the number of digits in the number.
      * 
-     * @return The number of digits.
+     * @return the number of digits.
      */
     public int getNumDigits() {
         int count = 0;
@@ -111,9 +111,9 @@ public class LinkedNumber {
     }
 
     /**
-     * Returns a string representation of the number.
+     * Create and return a String containing all the digits of the number.
      * 
-     * @return The string representation of the number.
+     * @return string version of the number.
      */
     public String toString() {
         StringBuilder result = new StringBuilder();
@@ -126,10 +126,10 @@ public class LinkedNumber {
     }
 
     /**
-     * Checks if this LinkedNumber object is equal to another LinkedNumber object.
+     * Compare this LinkedNumber object and other to see if they are equivalent.
      * 
      * @param other The other LinkedNumber object to compare.
-     * @return true if the two objects are equal, false otherwise.
+     * @return true if the two objects are equal and false if they are not.
      */
     public boolean equals(LinkedNumber other) {
         if (this.base != other.getBase() || this.getNumDigits() != other.getNumDigits()) {
@@ -150,9 +150,9 @@ public class LinkedNumber {
     /**
      * Converts the number to a new base.
      * 
-     * @param newBase The new base to convert the number to.
-     * @return A new LinkedNumber object representing the converted number.
-     * @throws LinkedNumberException if the number is not valid for conversion.
+     * @param newBase The new base to convert to.
+     * @return a new LinkedNumber object that represents the new converted number.
+     * @throws LinkedNumberException if the number is invalid and cant be converted.
      */
     public LinkedNumber convert(int newBase) {
         if (!isValidNumber()) {
@@ -197,7 +197,7 @@ public class LinkedNumber {
      */
     public void addDigit(Digit digit, int position) {
         if (position < 0 || position > getNumDigits() + 1) {
-            throw new LinkedNumberException("Invalid position");
+            throw new LinkedNumberException("invalid position");
         }
     
         DLNode<Digit> newNode = new DLNode<>(digit);
@@ -243,13 +243,13 @@ public class LinkedNumber {
     /**
      * Removes a digit from the specified position in the number.
      * 
-     * @param position The position of the digit to remove.
+     * @param position The position to remove the digit.
      * @return The value of the removed digit.
      * @throws LinkedNumberException if the position is invalid.
      */
     public int removeDigit(int position) {
         if (position < 0 || position >= getNumDigits()) {
-            throw new LinkedNumberException("Invalid position");
+            throw new LinkedNumberException("invalid position");
         }
     
         DLNode<Digit> nodeToRemove;
