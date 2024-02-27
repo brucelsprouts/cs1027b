@@ -123,6 +123,53 @@ public class TestLinkedNumber {
 		return f.equals("21526") && b.equals("62512") && b1 && b2 && b3 && b4 && b5 && b6;
 	}
 	
+	private static boolean test11 () {
+		String msg = "";
+		try {
+			LinkedNumber ln = new LinkedNumber("12345", 10);
+			ln.addDigit(new Digit('6'), 10); // Attempt to add at an invalid position
+		} catch (LinkedNumberException e) {
+			msg = e.getMessage();
+		}
+		return msg.toLowerCase().strip().equals("invalid position");
+	}
+	
+	private static boolean test12 () {
+		String msg = "";
+		try {
+			LinkedNumber ln = new LinkedNumber("12345", 10);
+			ln.removeDigit(5); // Attempt to remove from an invalid position
+		} catch (LinkedNumberException e) {
+			msg = e.getMessage();
+		}
+		return msg.toLowerCase().strip().equals("invalid position");
+	}
+
+	private static boolean test13 () {
+		String msg = "";
+		try {
+			LinkedNumber ln = new LinkedNumber("", 10); // Empty LinkedNumber
+			ln.removeDigit(0); // Attempt to remove from an empty LinkedNumber
+		} catch (LinkedNumberException e) {
+			msg = e.getMessage();
+		}
+		System.out.println(msg);
+		return msg.toLowerCase().strip().equals("invalid position");
+	}
+
+	private static boolean test14 () {
+		LinkedNumber ln = new LinkedNumber("12345", 10);
+		LinkedNumber converted = ln.convert(10); // Convert to the same base
+		return ln.equals(converted);
+	}
+
+	private static boolean test15 () {
+		LinkedNumber ln = new LinkedNumber("11111", 1);
+		LinkedNumber converted1 = ln.convert(10); // Convert from base 1
+		LinkedNumber converted2 = converted1.convert(1); // Convert back to base 1
+		return ln.equals(converted2);
+	}
+	
 	
 	public static void main(String[] args) {
 
@@ -185,6 +232,31 @@ public class TestLinkedNumber {
 			if (test10()) System.out.println("Test 10 Passed");
 			else System.out.println("Test 10 Failed");
 		} catch (Exception e) { System.out.println("Test 10 Failed (exception)"); }
+
+		try {
+			if (test11()) System.out.println("Test 11 Passed");
+			else System.out.println("Test 10 Failed");
+		} catch (Exception e) { System.out.println("Test 11 Failed (exception)"); }
+
+		try {
+			if (test12()) System.out.println("Test 12 Passed");
+			else System.out.println("Test 10 Failed");
+		} catch (Exception e) { System.out.println("Test 12 Failed (exception)"); }
+
+		try {
+			if (test13()) System.out.println("Test 13 Passed");
+			else System.out.println("Test 13 Failed");
+		} catch (Exception e) { System.out.println("Test 13 Failed (exception)"); }
+
+		try {
+			if (test14()) System.out.println("Test 14 Passed");
+			else System.out.println("Test 14 Failed");
+		} catch (Exception e) { System.out.println("Test 14 Failed (exception)"); }
+
+		try {
+			if (test15()) System.out.println("Test 15 Passed");
+			else System.out.println("Test 15 Failed");
+		} catch (Exception e) { System.out.println("Test 15 Failed (exception)"); }
 
 	}
 	
