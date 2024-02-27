@@ -165,8 +165,6 @@ public class LinkedNumber {
         }
         return true; // Numbers are equal.
     }
-    
-    
 
     /**
      * Converts the number to a new base.
@@ -218,7 +216,6 @@ public class LinkedNumber {
         return new LinkedNumber(sb.toString(), newBase);
     }
     
-    
     /**
      * Adds a digit at the specified position in the number.
      * 
@@ -227,42 +224,47 @@ public class LinkedNumber {
      * @throws LinkedNumberException if the position is invalid.
      */
     public void addDigit(Digit digit, int position) {
+        // Check if the position is valid.
         if (position < 0 || position > getNumDigits() + 1) {
             throw new LinkedNumberException("invalid position");
         }
     
-        DLNode<Digit> newNode = new DLNode<>(digit);
+        DLNode<Digit> newNode = new DLNode<>(digit);    // Create node for given digit.
     
-        if (position == 0) {
-            if (rear == null) {
+        // Add node to position.
+        if (position == 0) {    // Rear position.
+            if (rear == null) { // Set both front and rear to the new node.
                 rear = newNode;
                 front = newNode;
-            } else {
+            } else {    // Add to rear otherwise.
                 newNode.setPrev(rear);
                 rear.setNext(newNode);
                 rear = newNode;
             }
-        } else if (position == getNumDigits()) {
-            if (front == null) {
+        } else if (position == getNumDigits()) {    // Front position.
+            if (front == null) {    // Set both front and rear to the new node.
                 front = newNode;
                 rear = newNode;
-            } else {    
+            } else {    // Add to front otherwise.
                 newNode.setNext(front);
                 front.setPrev(newNode);
                 front = newNode;
             }
-        } else {
-            DLNode<Digit> current = front;
+        } else {    // Middle of the number.
+            DLNode<Digit> current = front;  // Pointer of the number, starting from the front.
     
+            // Iterate through the list to find the specified position.
             for (int i = getNumDigits(); i > position; i--) {
                 current = current.getNext();
             }
     
+            // Get previous node and update pointer to add new node.
             DLNode<Digit> prevNode = current.getPrev();
             newNode.setNext(current);
             newNode.setPrev(prevNode);
             current.setPrev(newNode);
     
+            // Update pointers of adjacent nodes.
             if (prevNode != null) {
                 prevNode.setNext(newNode);
             } else {
@@ -279,45 +281,48 @@ public class LinkedNumber {
      * @throws LinkedNumberException if the position is invalid.
      */
     public int removeDigit(int position) {
+        // Check if the position is valid.
         if (position < 0 || position >= getNumDigits()) {
             throw new LinkedNumberException("invalid position");
         }
     
-        DLNode<Digit> nodeToRemove;
+        DLNode<Digit> nodeToRemove; // Create node to be removed.
 
-        if (position == 0) {
-            nodeToRemove = rear;
+        // Add node to position.
+        if (position == 0) {    // Rear position.
+            nodeToRemove = rear;    // Node to remove.
             rear = rear.getPrev();
-            if (rear != null) {
+            if (rear != null) {     // Set next pointer of new rear to null.
                 rear.setNext(null);
-            } else {
+            } else {    // Set front to null if rear is null.
                 front = null;
             }
-        } else if (position == getNumDigits() - 1) {
-            nodeToRemove = front;
+        } else if (position == getNumDigits() - 1) {    // Front position
+            nodeToRemove = front;   // Node to remove
             front = front.getNext();
-            if (front != null) {
+            if (front != null) {    // Set previous pointer of front to null.
                 front.setPrev(null);
-            } else {
+            } else {    // Set rear to null if front is null.
                 rear = null;
             }
-        } else {
-            DLNode<Digit> current = rear;
-            for (int i = 0; i < position; i++) {
+        } else {    // Middle of the number.
+            DLNode<Digit> current = rear;   // Pointer in number, starting from rear.
+            for (int i = 0; i < position; i++) {    // Traverse to specified node.
                 current = current.getPrev();
             }
             nodeToRemove = current;
-            DLNode<Digit> prevNode = current.getPrev();
-            DLNode<Digit> nextNode = current.getNext();
-            prevNode.setNext(nextNode);
-            nextNode.setPrev(prevNode);
+            DLNode<Digit> prevNode = current.getPrev(); // Previous node.
+            DLNode<Digit> nextNode = current.getNext(); // Next node.
+            prevNode.setNext(nextNode); // Update next pointer of previous node.
+            nextNode.setPrev(prevNode); // Update previous pointer of next node.
         }
     
-        int value = nodeToRemove.getElement().getValue();
+        int value = nodeToRemove.getElement().getValue();   // Value of the removed digit.
         for (int i = 0; i < position; i++) {
             value *= base;
         }
     
+        // Return the value of the removed digit.
         return value;
     }
 }
