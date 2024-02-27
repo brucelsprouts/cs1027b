@@ -1,0 +1,24 @@
+Answers for Lab 6
+-----------------------------------------------
+
+
+EXERCISE 1
+
+1. How many swaps must be made to correctly reverse the array?
+To reverse an array, half its length in swaps suffices: if the array has length n, then n/2 swaps are required.
+
+2. Does the code need to change for an array of odd length vs an array of even length? Write your answers in AnswersLab6.txt.
+The code remains unchanged regardless of the array's length, be it odd or even. The swapping logic remains consistent in both cases.
+
+EXERCISE 2
+
+3. In expandCapacity(), why does the loop start at 1 instead of 0? Does this matter?
+The loop begins at 1 because the first stack item is at index 1. In ArrayStack, index 0 is empty, and elements start from index 1. Hence, when expanding the stack, the loop starts at index 1 to maintain element order.
+
+EXERCISE 3
+
+4. Does the order of the two pops matter? What if we swapped the order of op1 and op2? In which cases would this change the output and in which cases would it not change the output?
+The order of pops matters. Swapping op1 and op2 alters output, notably in non commutative operations like subtraction or division. For instance, in "5 3 -", changing pop order changes the result. Yet, in commutative operations like addition or multiplication, pop order doesn't affect output.
+
+5. Once the loop is finished, how do you obtain the result from the stack?
+After the loop, we get the result by popping the final item from the stack, which is the only one remaining after evaluating the entire postfix expression.

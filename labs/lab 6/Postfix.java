@@ -5,10 +5,10 @@ public class Postfix {
 	private ArrayStack<String> expStack;
 	private PostfixEvaluator evaluator;
 	
-	public Postfix () {
-		// ADD CODE HERE.
-		
-	}
+	public Postfix() {
+        expStack = new ArrayStack<>();
+        evaluator = new PostfixEvaluator();
+    }
 
 	public void run () {
 		String expression, action = "e";
@@ -25,15 +25,9 @@ public class Postfix {
 					result = evaluator.evaluate(expression.trim());
 					System.out.println("The result is " + result);
 	
-					// ADD CODE HERE.
-					
-				
+					expStack.push(expression.trim());					
 				} else if (action.equals("r")) {
-
-					// ADD CODE HERE.
-
-
-
+					showRecent(3);
 				}
 
 				System.out.println("\nWhat do you want to do?");
@@ -50,24 +44,19 @@ public class Postfix {
 	}
 	
 	private void showRecent (int numToShow) {
-
-		ArrayStack<String> tmp = new ArrayStack<String>();
-
 		System.out.println("Recent Expressions:");
-		
-		
-		// ADD CODE HERE.
-		
-		
-		
-		
-		
-		
-		
-		
-
+        int count = 0;
+        ArrayStack<String> tmp = new ArrayStack<>();
+        while (!expStack.isEmpty() && count < numToShow) {
+            String expression = expStack.pop();
+            System.out.println("\t" + expression + " = " + evaluator.evaluate(expression));
+            tmp.push(expression);
+            count++;
+        }
+        while (!tmp.isEmpty()) {
+            expStack.push(tmp.pop());
+        }
 	}
-	
 	
 	public static void main (String[] args) {
 		Postfix pf = new Postfix();

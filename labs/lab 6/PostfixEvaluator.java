@@ -22,8 +22,7 @@ public class PostfixEvaluator {
 	 * Sets up this evalutor by creating a new stack.
 	 */
 	public PostfixEvaluator() {
-		// ADD CODE HERE.
-
+        stack = new ArrayStack<>();
 	}
 
 	/**
@@ -41,15 +40,14 @@ public class PostfixEvaluator {
 
 		while (tokenizer.hasMoreTokens()) {
 			token = tokenizer.nextToken();
-
-			
-			// ADD CODE HERE.
-			
-			
-			
-			
-			
-			
+			if (!isOperator(token)) {
+                stack.push(Integer.parseInt(token));
+            } else {
+                op2 = stack.pop();
+                op1 = stack.pop();
+                result = evalSingleOp(token.charAt(0), op1, op2);
+                stack.push(result);
+            }
 		}
 
 		return result;
