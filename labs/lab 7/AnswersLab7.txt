@@ -1,0 +1,31 @@
+Answers for Lab 7
+-----------------------------------------------
+
+
+
+EXERCISE 1
+
+1. Which methods in the DLQueue class are taking in a parameter of the generic type T?
+the methods enqueue(T element) takes in a parameter of the generic type T
+
+2. Which methods in the DLQueue class have a return type of the generic type T?
+the methods dequeue(), first(), getFront(), and getRear() have a return type of the generic type T
+
+
+3. Suppose you didn't have an instance variable storing the current number of elements in the queue. How could you determine the number of elements for the size() method if such an instance variable was not available?
+Counting the queue's elements involves traversing the linked list from front to rear (or rear to front) and incrementing a counter until reaching the end. However, this method is less efficient than maintaining a count variable, as it has a time complexity of O(n), where n is the number of elements in the queue.
+
+EXERCISE 2
+
+4. Consider the possibility of using an Array Queue or a Circular Array Queue instead of the Doubly Linked Queue being used in this simulation. Would the simulation's results be impacted by switching to a different Queue implementation?
+switching the Queue won't impact simulation results if the chosen Queue supports needed operations. The change mainly affects the data structure and performance
+
+5. Which line(s) of code in Snail.java and/or SnailRace.java would you have to modify if you were going to use a different queue implementation?
+to switch to a different queue, modify the Snail constructor's movePattern queue instantiation line. For instance, if choosing an Array or Circular Array Queue, replace movePattern = new DLQueue<>(); with the appropriate instantiation
+
+
+
+
+
+
+
