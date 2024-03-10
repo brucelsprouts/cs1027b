@@ -1,0 +1,35 @@
+Answers for Lab 8
+-----------------------------------------------
+
+
+EXERCISE 1
+
+1. What values are expected for sortBy? What does each one stand for / represent?
+
+
+
+2. What should the while loop condition be so that it continues to prompt the user for input until they enter 'n', 'e', or 'c'. Should this conditional include && (and) or || (or) operators? 
+
+
+
+3. How many different approaches to printing out the contact list can you think of? Which one requires the least amount of code to be added?
+
+
+
+4. How are the contacts sorted when you multiply -1 by the result in the compareByName() method? Why is this happening?
+
+
+
+
+EXERCISE 2
+
+5. How do we know that we can call iterator() on each of the 5 collections from the array? Why does this not cause a compiler error?
+
+
+
+6. Can you tell how each of the collections was implemented? (i.e. were they implemented with arrays, linked lists, or other underlying data structures?) How can we loop through the values without knowledge of their implementation?
+
+
+
+
+
