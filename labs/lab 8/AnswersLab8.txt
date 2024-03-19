@@ -1,0 +1,27 @@
+Answers for Lab 8
+-----------------------------------------------
+
+
+EXERCISE 1
+
+1. What values are expected for sortBy? What does each one stand for / represent?
+The expected values for sortBy are 'n' (name), 'e' (email), or 'c' (city).
+
+2. What should the while loop condition be so that it continues to prompt the user for input until they enter 'n', 'e', or 'c'. Should this conditional include && (and) or || (or) operators? 
+The while loop condition should be (c == 'n' || c == 'e' || c == 'c'). This uses the || (or) operator.
+
+3. How many different approaches to printing out the contact list can you think of? Which one requires the least amount of code to be added?
+Multiple approaches can be considered for printing the contact list. One approach is using the toString method of each Person object and printing the list. This requires minimal code.
+
+4. How are the contacts sorted when you multiply -1 by the result in the compareByName() method? Why is this happening?
+When multiplying -1 by the result in the compareByName method, the sorting order is reversed. This is because reversing the sign of the result effectively flips the order of the elements.
+
+EXERCISE 2
+
+5. How do we know that we can call iterator() on each of the 5 collections from the array? Why does this not cause a compiler error?
+All array collections implement the iterator() method without causing a compiler error. AbstractCollection defines this method, and all classes implementing AbstractCollection must provide an implementation for it.
+
+6. Can you tell how each of the collections was implemented? (i.e. were they implemented with arrays, linked lists, or other underlying data structures?) How can we loop through the values without knowledge of their implementation?
+Without specific knowledge of each collection's implementation, we can still loop through values using iterators. Each collection's implementation manages elements, with ArrayList using an array, HashSet using a hash table, LinkedList using a linked list, TreeSet using a balanced binary search tree, and Vector using a dynamically resized array. Despite the underlying differences, they expose elements through the iterator interface, enabling uniform iteration.
+
+
