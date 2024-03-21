@@ -1,0 +1,54 @@
+Answers for Lab 9
+-----------------------------------------------
+
+EXERCISE 1
+
+1. Answer the following questions about the Fibonacci and Factorial programs:
+
+a) Why do the iterative methods (ifib and ifact) require so many variables?
+Iterative methods like ifib and ifact need many variables for state maintenance during computation.
+
+b) How do the recursive methods (rfib and rfact) work without so many variables?
+Recursive methods like rfib and rfact use function calls and stack frames for state, requiring fewer variables.
+
+c) What are the base cases of the recursive methods (rfib and rfact)?
+rfib: if (n == 1 || n == 2) returns 1.
+rfact: if (n == 1) returns 1.
+
+2. Write down the running time printed out to the console for each of the following inputs:
+
+Factorial(15): Elapsed time: <time>ms; number of calls: <calls>
+Factorial(25): Elapsed time: <time>ms; number of calls: <calls>
+Factorial(35): Elapsed time: <time>ms; number of calls: <calls>
+Factorial(45): Elapsed time: <time>ms; number of calls: <calls>
+
+Fibonacci(15): Elapsed time: <time>ms; number of calls: <calls>
+Fibonacci(25): Elapsed time: <time>ms; number of calls: <calls>
+Fibonacci(35): Elapsed time: <time>ms; number of calls: <calls>
+Fibonacci(45): Elapsed time: <time>ms; number of calls: <calls>
+
+3. What patterns do you notice with the running times of each program with different input numbers?
+- Running time increases with input number.
+- Recursive methods have higher times, especially for larger inputs.
+- Method calls increase with input for recursive algorithms.
+
+4. What is the value of methodCalls2 (calls to rfib(2)) when n=45?
+Value of methodCalls2 for n=45 is not specified.
+
+5. Why is the recursive algorithm for computing Fibonacci numbers so slow compared to the iterative algorithm? Does the value of methodCalls2 make sense with this rationale?
+Recursive Fibonacci recalculates values, leading to redundant calls and slower performance compared to the iterative method. The value of methodCalls2 reflects this redundancy.
+
+EXERCISE 3
+
+6. How many activation records are there in the execution stack?
+When the execution pauses at line 9, there are 3 activation records in the execution stack.
+
+7. Write the values of 
+param1 (in m1) = '3'
+local1 (in m1) = 1
+i (in the upper m3) = 1
+i (in the lower m3) = 0
+value (in the lower m3) = 2
+
+8. How did the execution stack change after you pressed F6 twice?
+After pressing F6 twice, the execution stack shrinks as the method calls return. The activation records associated with m1 and its caller m2 are removed from the stack.
