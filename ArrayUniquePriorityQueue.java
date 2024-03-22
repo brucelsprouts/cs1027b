@@ -1,8 +1,6 @@
 /**
- * Represents a priority queue where each element has a unique priority.
- * Elements are stored in a doubly linked list structure.
+ * Implements the provided UniquePriorityQueueADT interface and supports the generic type T
  * 
- * @param <T> the type of elements stored in the priority queue
  * @author Bruce Lin
  */
 public class ArrayUniquePriorityQueue<T> implements UniquePriorityQueueADT<T> {
@@ -112,6 +110,7 @@ public class ArrayUniquePriorityQueue<T> implements UniquePriorityQueueADT<T> {
      */
     @Override
     public void updatePriority(T data, double newPrio) throws CollectionException {
+        // Find the index of the element to update
         int index = -1;
         for (int i = 0; i < count; i++) {
             if (queue[i].equals(data)) {
@@ -119,10 +118,11 @@ public class ArrayUniquePriorityQueue<T> implements UniquePriorityQueueADT<T> {
                 break;
             }
         }
+        // If element not found, throw exception
         if (index == -1) {
             throw new CollectionException("Item not found in PQ");
         }
-            
+        
         // Remove the item and its priority
         for (int i = index; i < count - 1; i++) {
             queue[i] = queue[i + 1];

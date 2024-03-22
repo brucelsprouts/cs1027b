@@ -30,10 +30,11 @@ public class TestPath {
 				if (debugging) JOptionPane.showMessageDialog(null,"TestPath - Test " + num + " Failed");
 			}
 		
-		} catch (Exception e) {
-			System.out.println("TestPath - Test " + num + " Failed (exception)");
-			if (debugging) JOptionPane.showMessageDialog(null,"TestPath - Test " + num + " Failed (exception)");
-		}
+} catch (Exception e) {
+    System.out.println("TestPath - Test " + num + " Failed (exception): " + e.getMessage());
+    e.printStackTrace();
+}
+
 	}
 	
 	public static void main(String[] args) {
