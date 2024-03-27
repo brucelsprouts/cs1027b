@@ -1,0 +1,35 @@
+Answers for Lab 10
+-----------------------------------------------
+
+EXERCISE 1
+
+1. What should the return type be in each of the following methods?
+
+getData() --> T
+getLeft() --> BinaryTreeNode<T>
+getRight() --> BinaryTreeNode<T>
+
+2. What should the parameter type be in each of the following methods?
+
+setData() --> T
+setLeft() --> BinaryTreeNode<T>
+setRight() --> BinaryTreeNode<T>
+
+3. What would need to be added/removed/changed to make this class work for a more general tree such that each node could have more than 2 nodes?
+Replace left and right with a list of children, like List<BinaryTreeNode<T>> children.
+
+EXERCISE 2
+
+4. What is the base case of the size(r) method? What are the recursive cases?
+The base case for size(r) is when r is null, returning 0. The recursive cases occur when r is not null, adding 1 for the current node to the sizes of its left and right subtrees.
+
+5. What is the main difference between the 3 methods: inorder(), preorder(), and postorder()? What is the "visit" action being done in the implementations of these traversals?
+The main differences are in the node visitation order: Inorder visits left subtree, node, right subtree; Preorder visits node, left subtree, right subtree; Postorder visits left subtree, right subtree, node. The "visit" action usually means processing the node's data.
+
+6. In the recFormatTree() method, what is the space parameter used for? What is the default value when this method is first called? What is being concatenated to this space value in the recursive calls? Does this make sense for how the tree is being displayed?
+In recFormatTree(), the space parameter is for indentation, starting as an empty string. A tab character ("\t") is added to space in each recursive call for child nodes, aiding in visualizing the tree's structure by depth.
+
+EXERCISE 3
+
+7. How can you tell if a given node is a leaf node?
+A node is a leaf node if both its left and right children are null.
