@@ -1,21 +1,36 @@
 /**
- * 
+ * Implements a quadtree data structure for efficient management and querying of a two-dimensional space, typically used in applications such as image processing, spatial indexing, and geographical information systems. 
+ * The quadtree subdivides a space into four quadrants recursively until each leaf node represents a single pixel or a homogeneous area within a specified tolerance.
+ * This class provides methods for constructing the tree from a 2D pixel array, traversing the tree, and querying nodes based on spatial location, color similarity, and tree depth.
  * 
  * @author Bruce Lin
  */
 
- public class QuadrantTree {
+public class QuadrantTree {
+    // Root node of the quadtree
     private QTreeNode root;
 
-    // Constructor: builds the quadrant tree from a 2D pixel array
+    /**
+     * Constructs a quadrant tree from a 2D array of pixel values. It initiates the recursive building process starting from the root.
+     *
+     * @param thePixels A 2D array representing pixel values of an image, where each element corresponds to the color value of a pixel.
+     */
     public QuadrantTree(int[][] thePixels) {
         root = buildTree(thePixels, 0, 0, thePixels.length);
     }
 
-    // Recursive method to build the tree
+    /**
+     * Recursively constructs the quadtree by dividing the given region into four smaller quadrants until each leaf node corresponds to a single pixel.
+     *
+     * @param pixels A 2D array of pixel values for the entire image.
+     * @param x The x-coordinate of the upper left corner of the current quadrant.
+     * @param y The y-coordinate of the upper left corner of the current quadrant.
+     * @param size The size of the current quadrant, assumed to be a square.
+     * @return The root node of the constructed subtree for the current quadrant.
+     */
     private QTreeNode buildTree(int[][] pixels, int x, int y, int size) {
-        if (size == 1) { // Base case: single pixel
-            int color = pixels[y][x]; // Assuming pixels are stored in row-major order
+        if (size == 1) {
+            int color = pixels[y][x];
             return new QTreeNode(null, x, y, size, color);
         }
         
@@ -34,16 +49,26 @@
         return node;
     }
 
-    // Getter for the root node
+    /**
+     * Getter for the root node of the quadtree.
+     *
+     * @return The root node of the quadtree.
+     */
     public QTreeNode getRoot() {
         return root;
     }
 
-    // Returns a list containing all the nodes at the specified level
+    /**
+     * Retrieves all nodes at a specified depth level of the tree.
+     *
+     * @param r The current node being examined in the recursive call.
+     * @param theLevel The desired depth level to retrieve nodes from.
+     * @return A linked list containing all nodes at the specified depth level.
+     */
     public ListNode<QTreeNode> getPixels(QTreeNode r, int theLevel) {
         if (r == null || theLevel < 0) {
             return null;
-        }        
+        }
 
         // If the desired level is reached or the node is a leaf, add the node to the list
         if (theLevel == 0 || r.isLeaf()) {
@@ -74,7 +99,14 @@
         return list;
     }
 
-    // Returns a Duple object containing nodes with colors similar to theColor and at the specified level
+    /**
+     * Searches the quadtree to find all nodes at a specified depth level whose color is similar to a given target color.
+     *
+     * @param r The current node being examined.
+     * @param theColor The target color to match.
+     * @param theLevel The depth level at which to search for similar colors.
+     * @return A Duple object containing a list of matching nodes and the count of such nodes.
+     */
     public Duple findMatching(QTreeNode r, int theColor, int theLevel) {
         if (r == null || theLevel < 0) {
             return new Duple();
@@ -109,11 +141,19 @@
         return new Duple(list, count);
     }
 
-    // Returns a node at the specified level that contains the point (x, y)
+    /**
+     * Finds a node at a specific depth level that contains a given point defined by its x and y coordinates.
+     *
+     * @param r The current node being examined.
+     * @param theLevel The depth level at which to find the node.
+     * @param x The x-coordinate of the point.
+     * @param y The y-coordinate of the point.
+     * @return The node at the specified depth containing the point, or null if no such node exists.
+     */
     public QTreeNode findNode(QTreeNode r, int theLevel, int x, int y) {
         if (r == null || !r.contains(x, y)) {
             return null;
-        }        
+        }
 
         // If the desired level is reached or the node is a leaf, return the node
         if (theLevel == 0 || r.isLeaf()) {
@@ -127,7 +167,7 @@
                 return findNode(child, theLevel - 1, x, y);
             }
         }
-
-        return null; // No matching node found
+        
+        return null;
     }
 }
