@@ -41,7 +41,9 @@
 
     // Returns a list containing all the nodes at the specified level
     public ListNode<QTreeNode> getPixels(QTreeNode r, int theLevel) {
-        if (r == null || theLevel < 0) return null;
+        if (r == null || theLevel < 0) {
+            return null;
+        }        
 
         // If the desired level is reached or the node is a leaf, add the node to the list
         if (theLevel == 0 || r.isLeaf()) {
@@ -74,7 +76,9 @@
 
     // Returns a Duple object containing nodes with colors similar to theColor and at the specified level
     public Duple findMatching(QTreeNode r, int theColor, int theLevel) {
-        if (r == null || theLevel < 0) return new Duple();
+        if (r == null || theLevel < 0) {
+            return new Duple();
+        }        
 
         ListNode<QTreeNode> list = null;
         int count = 0;
@@ -107,7 +111,9 @@
 
     // Returns a node at the specified level that contains the point (x, y)
     public QTreeNode findNode(QTreeNode r, int theLevel, int x, int y) {
-        if (r == null || !r.contains(x, y)) return null;
+        if (r == null || !r.contains(x, y)) {
+            return null;
+        }        
 
         // If the desired level is reached or the node is a leaf, return the node
         if (theLevel == 0 || r.isLeaf()) {

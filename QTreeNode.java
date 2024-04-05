@@ -33,19 +33,38 @@ public class QTreeNode {
     }
 
     // Getters
-    public int getx() { return x; }
-    public int gety() { return y; }
-    public int getSize() { return size; }
-    public int getColor() { return color; }
-    public QTreeNode getParent() { return parent; }
+    public int getX() {
+        return x;
+    }
+    public int getY() {
+        return y;
+    }
+    public int getSize() {
+        return size;
+    }
+    public int getColor() {
+        return color;
+    }
+    public QTreeNode getParent() {
+        return parent;
+    }
 
     // Setters
-    public void setx(int newx) { x = newx; }
-    public void sety(int newy) { y = newy; }
-    public void setSize(int newSize) { size = newSize; }
-    public void setColor(int newColor) { color = newColor; }
-    public void setParent(QTreeNode newParent) { parent = newParent; }
-
+    public void setX(int newX) {
+        x = newX;
+    }
+    public void setY(int newY) {
+        y = newY;
+    }
+    public void setSize(int newSize) {
+        size = newSize;
+    }
+    public void setColor(int newColor) {
+        color = newColor;
+    }
+    public void setParent(QTreeNode newParent) {
+        parent = newParent;
+    }
     // Get a specific child
     public QTreeNode getChild(int index) throws QTreeException {
         if (children == null || index < 0 || index > 3) {
